@@ -1,0 +1,27 @@
+{
+  "name": "econify-challenge",
+  "version": "1.0.0",
+  "description": "GraphQL api for event planning",
+  "main": "src/server.js",
+  "scripts": {
+    "dev": "nodemon --watch src main"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/george-ge/econify-challenge.git"
+  },
+  "author": "George Ge",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/george-ge/econify-challenge/issues"
+  },
+  "homepage": "https://github.com/george-ge/econify-challenge#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-graphql": "^0.9.0",
+    "graphql": "^15.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.3"
+  }
+}

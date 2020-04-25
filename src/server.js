@@ -1,6 +1,6 @@
-const express = require('express');
-const expressGraphQL = require('express-graphql');
-const { buildSchema } = require('graphql');
+import express from 'express';
+import expressGraphQL from 'express-graphql';
+import { buildSchema } from 'graphql';
 
 const schema = buildSchema(`
     type Query {

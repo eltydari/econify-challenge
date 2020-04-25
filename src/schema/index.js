@@ -1,24 +1,44 @@
+import { GraphQLObjectType, GraphQLSchema } from 'graphql';
+import { GraphQLString } from 'graphql';
 import OrganizationType from './organization';
 import EventType from './event';
 import LocationType from './location';
-import { GraphQLObjectType, GraphQLSchema } from 'graphql';
+import { 
+    getOrganization,
+    getLocation,
+    getEvent
+} from '../resolver';
 
 const QueryType = new GraphQLObjectType({
     name: 'Query',
     description: 'Query orgs, events and locations',
-    fields: {
+    fields: () => ({
         organization: {
             type: OrganizationType,
+            args: {
+                name: { type: GraphQLString }
+            },
+            resolve: getOrganization
         },
         location: {
             type: LocationType,
+            args: {
+                name: { type: GraphQLString }
+            },
+            resolve: getLocation
         },
         event: {
             type: EventType,
+            args: {
+                name: { type: GraphQLString }
+            },
+            resolve: getEvent
         }
-    }
-})
+    })
+});
 
-const Schema = new GraphQLSchema({
+const schema = new GraphQLSchema({
     query: QueryType
-})
+});
+
+export default schema;

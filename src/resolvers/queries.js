@@ -2,17 +2,20 @@ import {
     organizations,
     events,
     locations
-} from '../db-temp/dataStore.js';
+} from '../db-temp/dataStore';
+import DataStore from '../db';
+import { copyDict } from '../utils/copy';
 
 export const getOrganization = (parent, args) => {
+    let db = new DataStore();
     let name = '';
     if (parent)
         name = parent.name;
     else
         name = args.name;
 
-    if (name in organizations){
-        let org = organizations[name];
+    if (name in db.organizations){
+        let org = copyDict(db.organizations[name]);
         org.name = name;
         return org;
     }
@@ -21,9 +24,9 @@ export const getOrganization = (parent, args) => {
 export const getLocation = (parent, args) => {
     let name = args.name;
 
-    if (locations.keys.length > 0){
+    if (Object.keys(locations).length > 0){
         if (name in locations){
-            let loc = locations[name];
+            let loc = copyDict(locations[name]);
             loc.name = name;
             return loc;
         }
@@ -36,7 +39,7 @@ export const getLocations = (parent) => {
     if (parent.locationIDs.size > 0){
         parent.locationIDs.forEach(name => {
             if (name in locations){
-                let loc = locations[name]
+                let loc = copyDict(locations[name]);
                 loc.name = name;
                 locs.push(loc);
             }
@@ -46,11 +49,12 @@ export const getLocations = (parent) => {
 }
 
 export const getEvent = (parent, args) => {
+    let db = new DataStore();
     let name = args.name;
 
-    if (events.keys.length > 0){
-        if (name in events){
-            let evt = events[name];
+    if (Object.keys(db.events).length > 0){
+        if (name in db.events){
+            let evt = copyDict(db.events[name]);
             evt.name = name;
             return evt;
         }
@@ -64,7 +68,7 @@ export const getEvents = (parent) => {
     {    
         parent.eventIDs.forEach(name => {
             if (name in events){
-                let evt = events[name]
+                let evt = copyDict(events[name]);
                 evt.name = name;
                 evts.push(evt);
             }

@@ -13,6 +13,7 @@ import {
     getLocation,
     getEvent
 } from '../resolvers/queries';
+import { addEvent } from '../resolvers/mutators';
 
 const QueryType = new GraphQLObjectType({
     name: 'Query',
@@ -55,7 +56,8 @@ const MutationType = new GraphQLObjectType({
                 am: { type: GraphQLNonNull(GraphQLBoolean) },
                 organization: { type: GraphQLNonNull(GraphQLString) },
                 description: { type: GraphQLString }
-            }
+            },
+            resolve: addEvent
         },
         addLocation: {
             type: LocationType,
@@ -64,7 +66,7 @@ const MutationType = new GraphQLObjectType({
                 address: { type: GraphQLNonNull(GraphQLString) },
                 organization: { type: GraphQLNonNull(GraphQLString) },
             },
-            resolve: () => {},
+            resolve: () => {}
         },
         updateEvent: {
             type: EventType,
@@ -105,7 +107,8 @@ const MutationType = new GraphQLObjectType({
 });
 
 const schema = new GraphQLSchema({
-    query: QueryType
+    query: QueryType,
+    mutation: MutationType
 });
 
 export default schema;

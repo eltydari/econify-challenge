@@ -2,7 +2,7 @@ import {
     organizations,
     events,
     locations
-} from './db/dataStore.js';
+} from '../db/dataStore.js';
 
 export const getOrganization = (parent, args) => {
     let name = '';

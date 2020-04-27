@@ -6,7 +6,7 @@ import {
 } from 'graphql';
 import LocationType from './location';
 import EventType from './event';
-import { getLocations, getEvents } from '../resolver'
+import { getLocations, getEvents } from '../resolvers/queries'
 
 const OrganizationType = new GraphQLObjectType({
     name: 'Organization',

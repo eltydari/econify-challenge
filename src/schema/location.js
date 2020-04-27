@@ -5,7 +5,7 @@ import {
     GraphQLFloat
 } from 'graphql';
 import OrganizationType from './organization';
-import { getOrganization } from '../resolver'
+import { getOrganization } from '../resolvers/queries'
 
 const LocationType = new GraphQLObjectType({
     name: 'Location',

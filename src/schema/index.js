@@ -7,7 +7,7 @@ import {
     getOrganization,
     getLocation,
     getEvent
-} from '../resolver';
+} from '../resolvers/queries';
 
 const QueryType = new GraphQLObjectType({
     name: 'Query',

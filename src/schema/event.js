@@ -5,7 +5,7 @@ import {
     GraphQLBoolean
 } from 'graphql';
 import OrganizationType from './organization';
-import { getOrganization } from '../resolver'
+import { getOrganization } from '../resolvers/queries'
 
 const EventType = new GraphQLObjectType({
     name: 'Event',

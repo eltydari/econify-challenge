@@ -4,7 +4,7 @@ import {
     locations
 } from '../db-temp/dataStore';
 import DataStore from '../db';
-import { copyDict } from '../utils/copy';
+import { copy } from '../utils/copy';
 
 export const getOrganization = (parent, args) => {
     let db = new DataStore();
@@ -15,7 +15,7 @@ export const getOrganization = (parent, args) => {
         name = args.name;
 
     if (name in db.organizations){
-        let org = copyDict(db.organizations[name]);
+        let org = copy(db.organizations[name]);
         org.name = name;
         return org;
     }
@@ -26,7 +26,7 @@ export const getLocation = (parent, args) => {
 
     if (Object.keys(locations).length > 0){
         if (name in locations){
-            let loc = copyDict(locations[name]);
+            let loc = copy(locations[name]);
             loc.name = name;
             return loc;
         }
@@ -39,7 +39,7 @@ export const getLocations = (parent) => {
     if (parent.locationIDs.size > 0){
         parent.locationIDs.forEach(name => {
             if (name in locations){
-                let loc = copyDict(locations[name]);
+                let loc = copy(locations[name]);
                 loc.name = name;
                 locs.push(loc);
             }
@@ -54,7 +54,7 @@ export const getEvent = (parent, args) => {
 
     if (Object.keys(db.events).length > 0){
         if (name in db.events){
-            let evt = copyDict(db.events[name]);
+            let evt = copy(db.events[name]);
             evt.name = name;
             return evt;
         }
@@ -68,7 +68,7 @@ export const getEvents = (parent) => {
     {    
         parent.eventIDs.forEach(name => {
             if (name in events){
-                let evt = copyDict(events[name]);
+                let evt = copy(events[name]);
                 evt.name = name;
                 evts.push(evt);
             }

@@ -1,13 +1,8 @@
-import {
-    organizations,
-    events,
-    locations
-} from '../db-temp/dataStore';
 import DataStore from '../db';
 
 export const getOrganization = (parent, args) => {
     let db = new DataStore();
-    let name = '';
+    let name;
     if (parent)
         name = parent.name;
     else

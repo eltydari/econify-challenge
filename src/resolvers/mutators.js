@@ -1,41 +1,49 @@
 import DataStore from '../db';
-import { copyDict } from '../utils/copy';
+import { getGeometryFromGoogle } from '../utils/apiRequests';
 
 export const addEvent = (parent, args) => {
-    let isoNow = new Date().toISOString();
     let db = new DataStore();
+    let name = args.name;
+    let date = args.date;
+    let time = args.time;
+    let am = args.am;
+    let org = args.organization;
+    let desc = "description" in args ? args.description : "";
 
-    let eventName = args.name;
-    let eventDate = args.date;
-    let eventTime = args.time;
-    let eventAM = args.am;
-    let eventOrg = args.organization;
-    let eventDesc = "description" in args ? args.description : "";
+    if (!(db.addEvent(name, org, date, time, am, desc)))
+        throw `Cannot add event "${name}" because it already exists.`;
 
-    if (!(eventOrg in db.organizations)){
-        db.organizations[eventOrg] = {
-            "locationIDs": new Set(),
-            "eventIDs": new Set(),
-            "createdAt": isoNow,
-            "updatedAt": isoNow
-        };
-    }
+    let response = db.events[name];
+    response.name = name;
+    return response;
+}
 
-    if (db.organizations[eventOrg].eventIDs.has(eventName) ||
-            eventName in db.events)
-        throw `Cannot add event "${eventName}" because it already exists.`;
-    
-    db.events[eventName] = {
-        "organization": eventOrg,
-        "date": eventDate,
-        "time": eventTime,
-        "am": eventAM,
-        "createdAt": isoNow,
-        "updatedAt": isoNow
-    };
-    db.organizations[eventOrg].eventIDs.add(eventName);
+export const updateEvent = (parent, args) => {
+    let db = new DataStore();
+    let name = args.name;
+    let date = args.date;
+    let time = args.time;
+    let am = args.am;
+    let org = args.organization;
+    let desc = "description" in args ? args.description : "";
 
-    let response = copyDict(db.events[eventName]);
-    response.name = eventName;
+    if (!(db.updateEvent(name, org, date, time, am, desc)))
+        throw `Cannot update event "${name}" because it doesn't exist.`;
+
+    let response = db.events[name];
+    response.name = name;
+    return response;
+}
+
+export const deleteEvent = (parent, args) => {
+    let db = new DataStore();
+    let name = args.name;
+
+    if (!(name in db.events))
+        throw `Cannot delete event "${name}" because it doesn't exist.`;
+
+    let response = db.events[eventName];
+    response.name = name;
+    db.deleteEvent(name);
     return response;
 }

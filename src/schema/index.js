@@ -13,7 +13,11 @@ import {
     getLocation,
     getEvent
 } from '../resolvers/queries';
-import { addEvent } from '../resolvers/mutators';
+import { 
+    addEvent,
+    updateEvent,
+    deleteEvent
+ } from '../resolvers/mutators';
 
 const QueryType = new GraphQLObjectType({
     name: 'Query',
@@ -78,7 +82,7 @@ const MutationType = new GraphQLObjectType({
                 organization: { type: GraphQLString },
                 description: { type: GraphQLString }
             },
-            resolve: () => {}
+            resolve: updateEvent
         },
         updateLocation: {
             type: LocationType,
@@ -94,7 +98,7 @@ const MutationType = new GraphQLObjectType({
             args: {
                 name: { type: GraphQLNonNull(GraphQLString) },
             },
-            resolve: () => {}
+            resolve: deleteEvent
         },
         deleteLocation: {
             type: LocationType,

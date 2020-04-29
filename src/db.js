@@ -194,6 +194,7 @@ class DataStore {
 
     _addOrgIfMissing(name){
         if (!(name in this._organizations)){
+            let isoNow = new Date().toISOString();
             this._organizations[name] = {
                 "locationIDs": new Set(),
                 "eventIDs": new Set(),

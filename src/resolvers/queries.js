@@ -4,7 +4,6 @@ import {
     locations
 } from '../db-temp/dataStore';
 import DataStore from '../db';
-import { copy } from '../utils/copy';
 
 export const getOrganization = (parent, args) => {
     let db = new DataStore();
@@ -15,18 +14,19 @@ export const getOrganization = (parent, args) => {
         name = args.name;
 
     if (name in db.organizations){
-        let org = copy(db.organizations[name]);
+        let org = db.organizations[name];
         org.name = name;
         return org;
     }
 }
 
 export const getLocation = (parent, args) => {
+    let db = new DataStore();
     let name = args.name;
 
-    if (Object.keys(locations).length > 0){
-        if (name in locations){
-            let loc = copy(locations[name]);
+    if (Object.keys(db.locations).length > 0){
+        if (name in db.locations){
+            let loc = db.locations[name];
             loc.name = name;
             return loc;
         }
@@ -34,16 +34,17 @@ export const getLocation = (parent, args) => {
 }
 
 export const getLocations = (parent) => {
+    let db = new DataStore();
     let locs = [];
 
     if (parent.locationIDs.size > 0){
-        parent.locationIDs.forEach(name => {
-            if (name in locations){
-                let loc = copy(locations[name]);
+        for (const name of parent.locationIDs){
+            if (name in db.locations){
+                let loc = db.locations[name];
                 loc.name = name;
                 locs.push(loc);
             }
-        });
+        }
     }
     return locs;
 }
@@ -54,7 +55,7 @@ export const getEvent = (parent, args) => {
 
     if (Object.keys(db.events).length > 0){
         if (name in db.events){
-            let evt = copy(db.events[name]);
+            let evt = db.events[name];
             evt.name = name;
             return evt;
         }
@@ -62,17 +63,18 @@ export const getEvent = (parent, args) => {
 }
 
 export const getEvents = (parent) => {
+    let db = new DataStore();
     let evts = [];
 
     if (parent.eventIDs.size > 0)
     {    
-        parent.eventIDs.forEach(name => {
-            if (name in events){
-                let evt = copy(events[name]);
+        for (const name of parent.eventIDs){
+            if (name in db.events){
+                let evt = db.events[name];
                 evt.name = name;
                 evts.push(evt);
             }
-        });
+        }
     }
     return evts;
 }

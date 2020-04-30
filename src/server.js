@@ -1,6 +1,7 @@
-import express from 'express';
-import expressGraphQL from 'express-graphql';
-import schema from './schema';
+const express = require('express');
+const expressGraphQL = require('express-graphql');
+const schema = require('./schema');
+require('dotenv').config();
 
 const app = express();
 app.use('/graphql', expressGraphQL({

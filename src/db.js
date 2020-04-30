@@ -1,4 +1,4 @@
-import { copy } from './utils/copy';
+const { copy } = require('./utils/copy');
 
 class DataStore {
 
@@ -213,4 +213,4 @@ class DataStore {
     }
 }
 
-export default DataStore;
+module.exports = DataStore;

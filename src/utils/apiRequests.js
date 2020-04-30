@@ -1,8 +1,8 @@
-import request from 'sync-request';
+const request = require('sync-request');
 
 const PLACES_URL = 'https://maps.googleapis.com/maps/api/place/findplacefromtext/json';
 
-export const getGeometryFromGoogle = (address) => {
+module.exports.getGeometryFromGoogle = (address) => {
     let apiKey = process.env.KEY;
     let url = PLACES_URL + `?key=${apiKey}&input=${address}&inputtype=textquery&fields=geometry`;
 

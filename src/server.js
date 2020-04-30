@@ -1,19 +1,10 @@
-const express = require('express');
-const expressGraphQL = require('express-graphql');
-const { buildSchema } = require('graphql');
-
-const schema = buildSchema(`
-    type Query {
-        hello: String
-    }
-`);
-
-const root = { hello: () => 'Hello world!' };
+import express from 'express';
+import expressGraphQL from 'express-graphql';
+import schema from './schema';
 
 const app = express();
 app.use('/graphql', expressGraphQL({
     schema: schema,
-    rootValue: root,
     graphiql: true,
   }));
 

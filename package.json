@@ -4,7 +4,9 @@
   "description": "GraphQL api for event planning",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon --watch src main"
+    "dev": "nodemon --watch src index.js",
+    "prod": "node index.js",
+    "test": "jasmine -r esm"
   },
   "repository": {
     "type": "git",
@@ -25,6 +27,8 @@
     "sync-request": "^6.1.0"
   },
   "devDependencies": {
+    "easygraphql-tester": "^5.1.6",
+    "jasmine": "^3.5.0",
     "nodemon": "^2.0.3"
   }
 }

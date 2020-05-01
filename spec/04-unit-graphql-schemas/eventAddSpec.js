@@ -13,7 +13,7 @@ describe('Adding an event', () => {
                 am,
                 organization{
                     name
-                }
+                },
                 description,
                 createdAt,
                 updatedAt

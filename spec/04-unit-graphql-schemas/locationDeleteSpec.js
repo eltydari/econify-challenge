@@ -1,4 +1,4 @@
-describe('Deleting an event', () => {
+describe('Deleting a location', () => {
     const EasyGraphQLTester = require('easygraphql-tester');
     const schema = require('../../src/schema');
 
@@ -10,30 +10,29 @@ describe('Deleting an event', () => {
     
     it('with valid mutation should pass', () => {
         const deleteTemplate = `
-            mutation DeleteEvent($name: String!){
-                deleteEvent(name:$name){
+            mutation DeleteLocation($name: String!){
+                deleteLocation(name:$name){
                     name,
-                    date,
-                    time,
-                    am,
+                    address,
+                    latitude,
+                    longitude,
                     organization{
                         name
                     },
-                    description,
                     createdAt,
                     updatedAt
                 }
             }
         `;
         tester.test(true, deleteTemplate, {
-            name: 'event1'
+            name: 'location1'
         });
     });
     
     it('with wrong arg should fail', () => {
         const deleteTemplate = `
-            mutation DeleteEvent($wrong: String!){
-                deleteEvent(wrong:$wrong){
+            mutation DeleteLocation($wrong: String!){
+                deleteLocation(wrong:$wrong){
                     name
                 }
             }

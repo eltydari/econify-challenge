@@ -17,13 +17,13 @@ describe('Updating an event', () => {
                 am,
                 organization{
                     name
-                }
+                },
                 description,
                 createdAt,
                 updatedAt
             }
         }
-    `
+    `;
     
     it('with valid mutation should pass', () => {
         tester.test(true, updateTemplate, {

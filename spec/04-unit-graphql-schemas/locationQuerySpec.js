@@ -1,4 +1,4 @@
-describe('Querying an event', () => {
+describe('Querying a location', () => {
     const EasyGraphQLTester = require('easygraphql-tester');
     const schema = require('../../src/schema');
 
@@ -7,19 +7,19 @@ describe('Querying an event', () => {
     beforeEach(function() {
         tester = new EasyGraphQLTester(schema);
     });
+    
 
     it('with valid query should pass', () => {
         tester.test(true, `
             {
-                event (name: "event1"){
+                location (name: "location1"){
                     name,
-                    date,
-                    time,
-                    am,
+                    address,
+                    latitude,
+                    longitude,
                     organization{
                         name
                     },
-                    description,
                     createdAt,
                     updatedAt
                 }
@@ -30,15 +30,16 @@ describe('Querying an event', () => {
     it('with no argument should fail', () => {
         tester.test(false, `
             {
-                event {
+                location {
                     name,
-                    date,
-                    time,
-                    am,
+                    address,
+                    latitude,
+                    longitude,
                     organization{
                         name
-                    }
-                    description
+                    },
+                    createdAt,
+                    updatedAt
                 }
             }
         `);
@@ -47,16 +48,17 @@ describe('Querying an event', () => {
     it('with extra query values should fail', () => {
         tester.test(false, `
             {
-                event (name: "event1"){
+                location (name: "location1"){
                     name,
-                    date,
-                    time,
-                    am,
-                    extra,
+                    address,
+                    latitude,
+                    longitude,
                     organization{
                         name
-                    }
-                    description
+                    },
+                    extra,
+                    createdAt,
+                    updatedAt
                 }
             }
         `);
@@ -65,13 +67,14 @@ describe('Querying an event', () => {
     it('with wrong org query should fail', () => {
         tester.test(false, `
             {
-                event (name: "event1"){
+                location (name: "location1"){
                     name,
-                    date,
-                    time,
-                    am,
+                    address,
+                    latitude,
+                    longitude,
                     organization,
-                    description
+                    createdAt,
+                    updatedAt
                 }
             }
         `);

@@ -18,21 +18,21 @@ const QueryType = new GraphQLObjectType({
         organization: {
             type: OrganizationType,
             args: {
-                name: { type: GraphQLString }
+                name: { type: GraphQLNonNull(GraphQLString) }
             },
             resolve: queries.getOrganization
         },
         location: {
             type: LocationType,
             args: {
-                name: { type: GraphQLString }
+                name: { type: GraphQLNonNull(GraphQLString) }
             },
             resolve: queries.getLocation
         },
         event: {
             type: EventType,
             args: {
-                name: { type: GraphQLString }
+                name: { type: GraphQLNonNull(GraphQLString) }
             },
             resolve: queries.getEvent
         }

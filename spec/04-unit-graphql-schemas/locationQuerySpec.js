@@ -1,4 +1,4 @@
-describe('Querying a location', () => {
+describe('Expressing query of a location', () => {
     const EasyGraphQLTester = require('easygraphql-tester');
     const schema = require('../../src/schema');
 

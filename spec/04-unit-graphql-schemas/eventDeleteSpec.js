@@ -1,4 +1,4 @@
-describe('Deleting an event', () => {
+describe('Expressing deletion of an event', () => {
     const EasyGraphQLTester = require('easygraphql-tester');
     const schema = require('../../src/schema');
 

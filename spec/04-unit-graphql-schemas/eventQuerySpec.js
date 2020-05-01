@@ -1,4 +1,4 @@
-describe('Querying an event', () => {
+describe('Expresssing query of an event', () => {
     const EasyGraphQLTester = require('easygraphql-tester');
     const schema = require('../../src/schema');
 

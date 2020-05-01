@@ -1,4 +1,4 @@
-describe('Adding an event', () => {
+describe('Expressing addition of an event', () => {
     const EasyGraphQLTester = require('easygraphql-tester');
     const schema = require('../../src/schema');
 

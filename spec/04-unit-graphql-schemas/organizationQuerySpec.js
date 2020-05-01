@@ -1,4 +1,4 @@
-describe('Querying an organization', () => {
+describe('Expressing query of an organization', () => {
     const EasyGraphQLTester = require('easygraphql-tester');
     const schema = require('../../src/schema');
 

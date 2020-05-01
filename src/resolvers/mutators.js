@@ -28,7 +28,11 @@ const mutators = {
         let db = new DataStore();
         let name = args.name;
         let date = args.date;
+        if (date && !validateDate(date))
+            throw `Cannot update event "${name}": date ${date} does not have valid format YYYY-MM-DD`;
         let time = args.time;
+        if (time && !validateTime(time))
+            throw `Cannot update event "${name}": time ${time} does not have valid format hh:mm`;
         let am = args.am;
         let org = args.organization;
         let desc = args.description;

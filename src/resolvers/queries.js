@@ -1,11 +1,11 @@
-const DataStore = '../db.js';
+const DataStore = require('../db.js');
 
 const queries = {
     getOrganization : (parent, args) => {
         let db = new DataStore();
         let name;
         if (parent)
-            name = parent.name;
+            name = parent.organization;
         else
             name = args.name;
 

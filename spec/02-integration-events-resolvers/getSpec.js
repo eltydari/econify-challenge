@@ -17,7 +17,6 @@ describe('Querying an event', () => {
         db.reset();
         mutators.addEvent(undefined, originalArgs);
     });
-
     
     it('with valid query should pass', () => {
         let args = { name: 'event1' };
@@ -35,7 +34,6 @@ describe('Querying an event', () => {
         let args = { name: 'event1' };
 
         let parent = queries.getEvent(undefined, args);
-        console.log(parent);
         let response = queries.getOrganization(parent);
 
         expect(response.name).toBe(parent.organization);

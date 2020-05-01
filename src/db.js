@@ -114,7 +114,7 @@ class DataStore {
         location.longitude = longitude || location.longitude;
         location.updatedAt = new Date().toISOString();
 
-        if (orgName !== location.organization){
+        if (orgName && orgName !== location.organization){
             this._deregisterLocation(name, location.organization);
             this._registerLocation(name, orgName);
             location.organization = orgName;

@@ -24,6 +24,7 @@
     "express": "^4.17.1",
     "express-graphql": "^0.9.0",
     "graphql": "^14.4.0",
+    "moment": "^2.25.0",
     "sync-request": "^6.1.0"
   },
   "devDependencies": {

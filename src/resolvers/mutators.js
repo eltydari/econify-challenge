@@ -1,15 +1,20 @@
 const DataStore = require('../db');
 const { getGeometryFromGoogle } = require('../utils/apiRequests');
+const { validateDate, validateTime } = require('../utils/validation');
 
 const mutators = {
     addEvent : (parent, args) => {
         let db = new DataStore();
         let name = args.name;
         let date = args.date;
+        if (!validateDate(date))
+            throw `Cannot add event "${name}": date ${date} does not have valid format YYYY-MM-DD`;
         let time = args.time;
+        if (!validateTime(time))
+            throw `Cannot add event "${name}": time ${time} does not have valid format hh:mm`;
         let am = args.am;
         let org = args.organization;
-        let desc = "description" in args ? args.description : "";
+        let desc = args.description;
 
         if (!(db.addEvent(name, org, date, time, am, desc)))
             throw `Cannot add event "${name}" because it already exists.`;
@@ -26,7 +31,7 @@ const mutators = {
         let time = args.time;
         let am = args.am;
         let org = args.organization;
-        let desc = "description" in args ? args.description : "";
+        let desc = args.description;
 
         if (!(db.updateEvent(name, org, date, time, am, desc)))
             throw `Cannot update event "${name}" because it doesn't exist.`;

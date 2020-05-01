@@ -19,7 +19,9 @@ describe('Querying an event', () => {
                     organization{
                         name
                     }
-                    description
+                    description,
+                    createdAt,
+                    updatedAt
                 }
             }
         `);

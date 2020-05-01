@@ -18,7 +18,9 @@ describe('Updating an event', () => {
                 organization{
                     name
                 }
-                description
+                description,
+                createdAt,
+                updatedAt
             }
         }
     `

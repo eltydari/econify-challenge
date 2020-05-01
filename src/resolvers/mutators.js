@@ -1,5 +1,5 @@
 const DataStore = require('../db');
-const { getGeometryFromGoogle } = require('../utils/apiRequests');
+const { getLocationFromGoogle } = require('../utils/apiRequests');
 const { validateDate, validateTime } = require('../utils/validation');
 
 const mutators = {
@@ -64,11 +64,12 @@ const mutators = {
         let address = args.address;
         let org = args.organization;
 
-        let locGeometry = getGeometryFromGoogle(address);
-        if (!locGeometry)
+        let locDetails = getLocationFromGoogle(address);
+        if (!locDetails)
             throw `Cannot add location "${name}" because address is invalid.`;
-        let latitude = locGeometry.lat;
-        let longitude = locGeometry.lng;
+        address = locDetails.formatted_address;
+        let latitude = locGeometry.geometry.location.lat;
+        let longitude = locDetails.geometry.location.lng;
 
         if (!(db.addLocation(name, org, address, latitude, longitude)))
             throw `Cannot add location "${name}" because it already exists.`;

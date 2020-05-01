@@ -1,26 +1,15 @@
-import { 
+const { 
     GraphQLObjectType, 
     GraphQLSchema,
     GraphQLNonNull,
     GraphQLString,
     GraphQLBoolean
-} from 'graphql';
-import OrganizationType from './organization';
-import EventType from './event';
-import LocationType from './location';
-import { 
-    getOrganization,
-    getLocation,
-    getEvent
-} from '../resolvers/queries';
-import { 
-    addEvent,
-    updateEvent,
-    deleteEvent,
-    addLocation,
-    updateLocation,
-    deleteLocation
- } from '../resolvers/mutators';
+} = require('graphql');
+const { OrganizationType } = require('./organization');
+const { EventType } =  require('./event');
+const { LocationType } = require('./location');
+const queries = require('../resolvers/queries');
+const mutators = require('../resolvers/mutators');
 
 const QueryType = new GraphQLObjectType({
     name: 'Query',
@@ -29,23 +18,23 @@ const QueryType = new GraphQLObjectType({
         organization: {
             type: OrganizationType,
             args: {
-                name: { type: GraphQLString }
+                name: { type: GraphQLNonNull(GraphQLString) }
             },
-            resolve: getOrganization
+            resolve: queries.getOrganization
         },
         location: {
             type: LocationType,
             args: {
-                name: { type: GraphQLString }
+                name: { type: GraphQLNonNull(GraphQLString) }
             },
-            resolve: getLocation
+            resolve: queries.getLocation
         },
         event: {
             type: EventType,
             args: {
-                name: { type: GraphQLString }
+                name: { type: GraphQLNonNull(GraphQLString) }
             },
-            resolve: getEvent
+            resolve: queries.getEvent
         }
     })
 });
@@ -64,7 +53,7 @@ const MutationType = new GraphQLObjectType({
                 organization: { type: GraphQLNonNull(GraphQLString) },
                 description: { type: GraphQLString }
             },
-            resolve: addEvent
+            resolve: mutators.addEvent
         },
         addLocation: {
             type: LocationType,
@@ -73,7 +62,7 @@ const MutationType = new GraphQLObjectType({
                 address: { type: GraphQLNonNull(GraphQLString) },
                 organization: { type: GraphQLNonNull(GraphQLString) },
             },
-            resolve: addLocation
+            resolve: mutators.addLocation
         },
         updateEvent: {
             type: EventType,
@@ -85,7 +74,7 @@ const MutationType = new GraphQLObjectType({
                 organization: { type: GraphQLString },
                 description: { type: GraphQLString }
             },
-            resolve: updateEvent
+            resolve: mutators.updateEvent
         },
         updateLocation: {
             type: LocationType,
@@ -94,21 +83,21 @@ const MutationType = new GraphQLObjectType({
                 address: { type: GraphQLString },
                 organization: { type: GraphQLString },
             },
-            resolve: updateLocation
+            resolve: mutators.updateLocation
         },
         deleteEvent: {
             type: EventType,
             args: {
                 name: { type: GraphQLNonNull(GraphQLString) },
             },
-            resolve: deleteEvent
+            resolve: mutators.deleteEvent
         },
         deleteLocation: {
             type: LocationType,
             args: {
                 name: { type: GraphQLNonNull(GraphQLString) },
             },
-            resolve: deleteLocation
+            resolve: mutators.deleteLocation
         }
     })
 });
@@ -118,4 +107,4 @@ const schema = new GraphQLSchema({
     mutation: MutationType
 });
 
-export default schema;
+module.exports = schema;

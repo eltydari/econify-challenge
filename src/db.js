@@ -1,4 +1,4 @@
-import { copy } from './utils/copy';
+const { copy } = require('./utils/copy');
 
 class DataStore {
 
@@ -7,9 +7,7 @@ class DataStore {
             return DataStore.instance;
         }
 
-        this._locations = {};
-        this._events = {};
-        this._organizations = {};
+        this.reset();
 
         DataStore.instance = this;
     }
@@ -24,6 +22,12 @@ class DataStore {
 
     get organizations() {
         return copy(this._organizations);
+    }
+
+    reset(){
+        this._locations = {};
+        this._events = {};
+        this._organizations = {};
     }
 
     addEvent(name, orgName, date, time, am, desc){
@@ -54,10 +58,14 @@ class DataStore {
         event.date = date || event.date;
         event.time = time || event.time;
         event.am = am || event.am;
-        event.desc = desc || event.desc;
         event.updatedAt = new Date().toISOString();
 
-        if (orgName !== event.organization){
+        if (desc === '')
+            event.description = desc;
+        else
+            event.description = desc || event.description;
+
+        if (orgName && orgName !== event.organization){
             this._deregisterEvent(name, event.organization);
             this._registerEvent(name, orgName);
             event.organization = orgName;
@@ -106,7 +114,7 @@ class DataStore {
         location.longitude = longitude || location.longitude;
         location.updatedAt = new Date().toISOString();
 
-        if (orgName !== location.organization){
+        if (orgName && orgName !== location.organization){
             this._deregisterLocation(name, location.organization);
             this._registerLocation(name, orgName);
             location.organization = orgName;
@@ -213,4 +221,4 @@ class DataStore {
     }
 }
 
-export default DataStore;
+module.exports = DataStore;

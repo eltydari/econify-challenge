@@ -1,23 +1,23 @@
-import { 
+const { 
     GraphQLObjectType,
     GraphQLNonNull,
     GraphQLString,
     GraphQLList
-} from 'graphql';
-import LocationType from './location';
-import EventType from './event';
-import { getLocations, getEvents } from '../resolvers/queries'
+} = require('graphql');
+const location = require('./location');
+const event = require('./event');
+const { getLocations, getEvents } = require('../resolvers/queries');
 
-const OrganizationType = new GraphQLObjectType({
+module.exports.OrganizationType = new GraphQLObjectType({
     name: 'Organization',
     fields: () => ({
         name: { type: GraphQLNonNull(GraphQLString) },
         locations: {
-            type: GraphQLList(LocationType),
+            type: GraphQLList(location.LocationType),
             resolve: getLocations
         },
         events: {
-            type: GraphQLList(EventType),
+            type: GraphQLList(event.EventType),
             resolve: getEvents
         },
         createdAt: { type: GraphQLNonNull(GraphQLString) },
@@ -25,4 +25,3 @@ const OrganizationType = new GraphQLObjectType({
     })
 });
 
-export default OrganizationType;

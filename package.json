@@ -4,7 +4,10 @@
   "description": "GraphQL api for event planning",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon --watch src main"
+    "clean": "rm -rf node_modules",
+    "dev": "nodemon --watch src src/server.js",
+    "prod": "node src/server.js",
+    "test": "jasmine"
   },
   "repository": {
     "type": "git",
@@ -18,13 +21,15 @@
   "homepage": "https://github.com/george-ge/econify-challenge#readme",
   "dependencies": {
     "dotenv": "^8.2.0",
-    "esm": "^3.2.25",
     "express": "^4.17.1",
     "express-graphql": "^0.9.0",
-    "graphql": "^15.0.0",
+    "graphql": "^14.4.0",
+    "moment": "^2.25.0",
     "sync-request": "^6.1.0"
   },
   "devDependencies": {
+    "easygraphql-tester": "^5.1.6",
+    "jasmine": "^3.5.0",
     "nodemon": "^2.0.3"
   }
 }

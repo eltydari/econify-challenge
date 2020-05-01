@@ -17,7 +17,7 @@ describe('Querying a location', () => {
         name: 'location1',
         address: '123 Main Street, New York, NY',
         organization: 'ABC'
-    }
+    };
 
     beforeEach(() => {
         const db = new DataStore();

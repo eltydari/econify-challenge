@@ -63,7 +63,7 @@ const queries = {
         let evts = [];
 
         if (parent.eventIDs.size > 0)
-        {    
+        {
             for (const name of parent.eventIDs){
                 if (name in db.events){
                     let evt = db.events[name];
